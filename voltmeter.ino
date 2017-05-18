@@ -10,6 +10,7 @@ const int ledPin = 13;
 float vout = 0.0;
 float vin = 0.0;
 float vref = 5.0;
+
 float R1 = 99100.0; //actual resistance of R1 (100k)
 float R2 = 99250.0; // actual resistance of R2 (100k)
 float R3 = 992000.0; // actual resistance of R3 (1M)
@@ -45,25 +46,25 @@ void loop(){
 
 	// Read the value at analog input
 	switch (range) {
-	case 5:
-		value = analogRead(analogInput);
-		vout = (value * vref) / 1024.0;
-		vin = vout;
-		break;
-	case 10:
-		value = analogRead(analogInput);
-		vout = (value * vref) / 1024.0;
-		vin = vout / (R1/(R1+R2)); 
-		break;
-	case 55:
-		value = analogRead(analogInput);
-		vout = (value * vref) / 1024.0;
-		vin = vout / (R1/(R1+R2+R3)); 
-		break;
-	case 99: // SPECIAL case to set reference voltage based on measured VCC
-		vrefin = analogRead(analogRefVolt);
-		vref = (vrefin * 5.5) / 1024.0;
-		break;    
+		case 5:
+			value = analogRead(analogInput);
+			vout = (value * vref) / 1024.0;
+			vin = vout;
+			break;
+		case 10:
+			value = analogRead(analogInput);
+			vout = (value * vref) / 1024.0;
+			vin = vout / (R1/(R1+R2)); 
+			break;
+		case 55:
+			value = analogRead(analogInput);
+			vout = (value * vref) / 1024.0;
+			vin = vout / (R1/(R1+R2+R3)); 
+			break;
+		case 99: // SPECIAL case to set reference voltage based on measured VCC
+			vrefin = analogRead(analogRefVolt);
+			vref = (vrefin * 5.5) / 1024.0;
+			break;    
    }
 
 	// Print on LCD
